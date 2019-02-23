@@ -257,7 +257,6 @@ geometry_msgs::Twist PurePursuit::calcTwist(double curvature, double cmd_velocit
 
   //TODO: always update even if it following the waypoints 
   twist.angular.z = current_velocity_.twist.linear.x * curvature;
-
   // static double prev_angular_velocity = 0;
   // // verify whether vehicle is following the path
   // bool following_flag = verifyFollowing();

@@ -13,7 +13,7 @@ import tf
 import cv2
 import yaml
 
-STATE_COUNT_THRESHOLD = 3
+STATE_COUNT_THRESHOLD = 2
 
 class TLDetector(object):
     def __init__(self):
@@ -62,9 +62,9 @@ class TLDetector(object):
         self.loop()
 
     def loop(self):
-    	rate = rospy.Rate(30)
+    	rate = rospy.Rate(10)
     	while not rospy.is_shutdown():
-    		if self.lights:
+    		if self.lights and self.pose is not None and self.waypoints is not None and self.camera_image is not None:
 	    		light_wp, state = self.process_traffic_lights()
 		        # rospy.logwarn("closest light wp : {0} \n and light state :{1}".format(light_wp, state))
 		        '''
@@ -166,19 +166,18 @@ class TLDetector(object):
         stop_line_positions = self.config['stop_line_positions']
         if(self.pose):
             car_wp_idx = self.get_closest_waypoint(self.pose.pose.position.x, self.pose.pose.position.y)
-
-        #TODO find the closest visible traffic light (if one exists)
-        diff = len(self.waypoints.waypoints) #all waypoints biggest possible range
-        for i, light in enumerate(self.lights): #iterate all lights
-        	#get strop line waypoint index
-        	line = stop_line_positions[i]
-        	temp_wp_idx = self.get_closest_waypoint(line[0], line[1])
-        	#find cloesest stop line waypoint index 
-        	d = temp_wp_idx - car_wp_idx
-        	if d >= 0 and d < diff:
-        		diff = d
-        		closest_light = light
-        		line_wp_idx = temp_wp_idx
+            #TODO find the closest visible traffic light (if one exists)
+            diff = len(self.waypoints.waypoints) #all waypoints biggest possible range
+            for i, light in enumerate(self.lights): #iterate all lights
+                #get strop line waypoint index
+                line = stop_line_positions[i]
+                temp_wp_idx = self.get_closest_waypoint(line[0], line[1])
+                #find cloesest stop line waypoint index 
+                d = temp_wp_idx - car_wp_idx
+                if d >= 0 and d < diff:
+                    diff = d
+                    closest_light = light
+                    line_wp_idx = temp_wp_idx
 
         if closest_light:
             state = self.get_light_state(closest_light)

@@ -7,7 +7,8 @@ class TLClassifier(object):
     def __init__(self):
 
         
-        PATH_TO_GRAPH = r'light_classification/model/ssd_sim/frozen_inference_graph.pb'
+        PATH_TO_GRAPH = r'light_classification/model/frozen_inference_graph.pb'
+        # PATH_TO_GRAPH = r'light_classification/model/ssd_sim/frozen_inference_graph.pb'
         
         #PATH_TO_GRAPH = r'light_classification/model/ssd_udacity/frozen_inference_graph.pb'
 

@@ -31,7 +31,7 @@ The **steering** control uses a **Yaw Controller** based on its current velocity
 
 The **brake** control uses a direct deceleration by applying a Torque based on its mass and wheel radius. 
 
-The update rate for Waypoint Updater and DBW node can be set between **10 to 30Hz**. It might be set at low end when camera is on or in real system.
+The update rate for Waypoint Updater and DBW node can be set between **10 to 50Hz**. It might be set at low end when camera is on or in real system.
 
 Waypoint Follower
 ---

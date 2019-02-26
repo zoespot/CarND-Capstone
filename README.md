@@ -5,7 +5,7 @@
 Overview
 ---
 
-This is the final CarND-Capstone of the Udacity Self-Driving Car Nanodegree: Programming a Real Self-Driving Car. This is Ying Li, Hardware Engineer for Self Driving Car SOC Chip and GPU at Nvidia, email:<zoe.liying@gmail.com>. Due to schedule limitations, I worked on my own. 
+This is the final CarND-Capstone of the Udacity Self-Driving Car Nanodegree: Programming a Real Self-Driving Car. This is Ying Li, Hardware Engineer for Self Driving Car SOC Chip and GPU at Nvidia, email: <zoe.liying@gmail.com>. Due to schedule limitations, I worked on my own. 
 
 Architecture 
 ---
@@ -49,7 +49,7 @@ Traffic lights are classified with transfer learning on a TensorFlow model **[SS
 
 Image capture and labeling work can be quite lengthy. Due to the limited time, I leveraged the existing labeled dataset from *[Vatsal Srivastava](https://github.com/coldKnight/TrafficLight_Detection-TensorFlowAPI#get-the-dataset) and [Alexander Lechner](https://github.com/alex-lechner/Traffic-Light-Classification#1-the-lazy-approach)*. 
 
-The interference jupyter notebook can be found [here](https://github.com/zoespot/CarND-Capstone/blob/master/light_classifier/tl_interference.ipynb). The results showed the light are correctly classified. 
+The inference jupyter notebook can be found [here](https://github.com/zoespot/CarND-Capstone/blob/master/light_classifier/tl_inference.ipynb). The results showed the light are correctly classified. 
 
 ![highway_red_light](./imgs/highway_red_light.JPG) 
 

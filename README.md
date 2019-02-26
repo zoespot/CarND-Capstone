@@ -43,6 +43,8 @@ Traffic Light Detector
 ---
 The traffic light detector subscribes the camera images and published the traffic light **stopline waypoint index** to **Waypoint Updater**. **KDTree** was also used here to find the closest waypoint before the closest light and its state color. If red state was detected **STATE_COUNT_THRESHOLD = 2** times, then its stopline index was published. Green and yellow traffic lights are ignored. I firstly use the foreknown traffic light info to validate my waypoint updater with traffic light detector behavior. The car stopped at each red light safely before the stopline. 
 
+![highway_stopped_red_light](./imgs/highway_stopped_red_light.JPG)
+
 Traffic Light Classification 
 --- 
 Traffic lights are classified with transfer learning on a TensorFlow model **[SSD Inception V2 Coco]**(http://download.tensorflow.org/models/object_detection/ssd_inception_v2_coco_2018_01_28.tar.gz). More options of models are available at [Tensorflow detection model zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/detection_model_zoo.md). The training process are conducted on two **separated image datasets**: Udacity highway simulator dataset and site lot. 

@@ -46,13 +46,13 @@ class WaypointUpdater(object):
         # TODO: Add a subscriber for /traffic_waypoint and /obstacle_waypoint below
 
         self.final_waypoints_pub = rospy.Publisher('final_waypoints', Lane, queue_size=1)
-
+        self.Rate = rospy.get_param('~rate')
 
         #rospy.spin()
         self.loop()
 
     def loop(self):
-        rate = rospy.Rate(15) #30Hz ok
+        rate = rospy.Rate(self.Rate) #30Hz ok
         while not rospy.is_shutdown():
             if self.pose and self.base_lane:
                 #get closest waypoint
@@ -104,11 +104,11 @@ class WaypointUpdater(object):
             p.pose = wp.pose
 
             #stop at 2 or 3 waypoints back from the line, so front of the car stops at the line
-            stop_idx = max(self.stopline_wp_idx - closest_idx -2 , 0) 
+            stop_idx = max(self.stopline_wp_idx - closest_idx -3 , 0) 
             dist = self.distance(waypoints, i , stop_idx)
             vel = math.sqrt(2 * MAX_DECEL * dist)
             #use more smooth linear decel vel
-            if vel < 1.:
+            if vel < 1.9:
                 vel = 0.
 
             p.twist.twist.linear.x = min(vel, wp.twist.twist.linear.x)

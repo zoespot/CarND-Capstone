@@ -4,12 +4,12 @@ import numpy as np
 import datetime
 
 class TLClassifier(object):
-    def __init__(self):
-
+    def __init__(self, is_simulator):
+        if is_simulator:
+            PATH_TO_GRAPH = r'light_classification/model/ssd_sim/frozen_inference_graph.pb'
+        else:
+            PATH_TO_GRAPH = r'light_classification/model/ssd_udacity/frozen_inference_graph.pb'
         
-        #PATH_TO_GRAPH = r'light_classification/model/ssd_sim/frozen_inference_graph.pb'
-        PATH_TO_GRAPH = r'light_classification/model/ssd_udacity/frozen_inference_graph.pb'
-
         self.graph = tf.Graph()
         self.threshold = .5
 

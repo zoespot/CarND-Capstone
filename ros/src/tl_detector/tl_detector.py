@@ -13,7 +13,7 @@ import tf
 import cv2
 import yaml
 
-STATE_COUNT_THRESHOLD = 2
+#STATE_COUNT_THRESHOLD = 2
 
 class TLDetector(object):
     def __init__(self):
@@ -50,7 +50,10 @@ class TLDetector(object):
         self.upcoming_red_light_pub = rospy.Publisher('/traffic_waypoint', Int32, queue_size=1)
 
         self.bridge = CvBridge()
-        self.light_classifier = TLClassifier()
+        
+        self.STATE_COUNT_THRESHOLD = rospy.get_param('~state_count_threshold')
+        self.is_simulator = rospy.get_param('~traffic_light_classifier_sim')
+        self.light_classifier = TLClassifier(self.is_simulator)
         self.listener = tf.TransformListener()
 
         self.state = TrafficLight.UNKNOWN
@@ -76,7 +79,7 @@ class TLDetector(object):
 		        if self.state != state:
 		            self.state_count = 0
 		            self.state = state
-		        elif self.state_count >= STATE_COUNT_THRESHOLD:
+		        elif self.state_count >= self.STATE_COUNT_THRESHOLD:
 		            self.last_state = self.state
 		            light_wp = light_wp if state == TrafficLight.RED else -1
 		            self.last_wp = light_wp
@@ -122,6 +125,7 @@ class TLDetector(object):
         """
         #TODO implement
         closest_idx = self.waypoint_tree.query([x, y],1)[1]
+        closest_idx = (closest_idx)%len(self.waypoints_2d)
         return closest_idx
 
     def get_light_state(self, light):

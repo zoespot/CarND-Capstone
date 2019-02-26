@@ -65,6 +65,8 @@ Environment Setup & Run
 ---
 First, I use native installation by setting up VMbox with Ubuntu 16.04 ROS Kinect and Dataspeed DBW. In order to improve display and enable copy/paste between virtualbox and local machine, I then installed Guest Addition. It's a little tricky as the ISO can't be mounted directly. I followed instructions [here](https://askubuntu.com/questions/321589/unable-to-mount-the-cd-dvd-image-on-the-machine-sandbox) with a local copy of [installation iso](https://download.virtualbox.org/virtualbox/6.0.4/).
 
+Launch files are parameterized for simulator and site lot situations with different *traffic light classification model*, *state count threashold* and *DBW and Waypoint update rate*.
+
 Run the simulator:
 ```bash
 cd ros

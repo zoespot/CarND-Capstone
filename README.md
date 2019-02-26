@@ -31,7 +31,7 @@ The **steering** control uses a **Yaw Controller** based on its current velocity
 
 The **brake** control uses a direct deceleration by applying a Torque based on its mass and wheel radius. 
 
-The update rate for Waypoint Updater and DBW node can be set between **15 to 50Hz**. It might be set at low end when camera is on or in real system.
+The update rate for Waypoint Updater and DBW node can be set between **10 to 30Hz**. It might be set at low end when camera is on or in real system.
 
 Waypoint Follower
 ---
@@ -41,9 +41,10 @@ The only change is made to **pure\_pursuit_core.cpp calcTwist** function. The fu
 
 Traffic Light Detector
 ---
-The traffic light detector subscribes the camera images and published the traffic light **stopline waypoint index** to **Waypoint Updater**. **KDTree** was also used here to find the closest waypoint before the closest light and its state color. If red state was detected **STATE_COUNT_THRESHOLD = 2** times, then its stopline index was published. Green and yellow traffic lights are ignored. I firstly use the foreknown traffic light info to validate my waypoint updater with traffic light detector behavior. The car stopped at each red light safely before the stopline. 
+The traffic light detector subscribes the camera images and published the traffic light **stopline waypoint index** to **Waypoint Updater**. **KDTree** was also used here to find the closest waypoint before the closest light and its state color. If red state was detected **STATE_COUNT_THRESHOLD = 2** times, then its stopline index was published. Green and yellow traffic lights are ignored. I firstly use the foreknown traffic light info to validate my waypoint updater with traffic light detector behavior. The car stopped at each red light safely before the stopline, and passed the green light with target speed. 
 
 ![highway_stopped_red_light](./imgs/highway_stopped_red_light.JPG)
+![highway_unstopped_green_light](./imgs/highway_unstopped_green_light.JPG)
 
 Traffic Light Classification 
 --- 

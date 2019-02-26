@@ -7,10 +7,8 @@ class TLClassifier(object):
     def __init__(self):
 
         
-        PATH_TO_GRAPH = r'light_classification/model/frozen_inference_graph.pb'
-        # PATH_TO_GRAPH = r'light_classification/model/ssd_sim/frozen_inference_graph.pb'
-        
-        #PATH_TO_GRAPH = r'light_classification/model/ssd_udacity/frozen_inference_graph.pb'
+        #PATH_TO_GRAPH = r'light_classification/model/ssd_sim/frozen_inference_graph.pb'
+        PATH_TO_GRAPH = r'light_classification/model/ssd_udacity/frozen_inference_graph.pb'
 
         self.graph = tf.Graph()
         self.threshold = .5
@@ -46,8 +44,8 @@ class TLClassifier(object):
         scores = np.squeeze(scores)
         classes = np.squeeze(classes).astype(np.int32)
 
-#         print('SCORES: ', scores[0])
-#         print('CLASSES: ', classes[0])
+        print('SCORES: ', scores[0])
+        print('CLASSES: ', classes[0])
 
         if scores[0] > self.threshold:
             if classes[0] == 1:
